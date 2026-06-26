@@ -1,0 +1,350 @@
+/* 전체 배경색 지정 **/
+body {background-color: #000;}
+
+/* 헤더 설정 */
+header {padding: 15px;}
+
+.header-inner {
+    position: relative;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    max-width: 71rem;
+    margin: 0 auto;
+}
+
+/* 헤더 메뉴 부분 햄버거 버튼 설정 */
+.menu-btn-custom {
+    display: none;
+
+    position: absolute;
+    top: 10px;
+    right: 5px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10;
+}
+
+.menu-btn-custom .line {
+    display: block;
+    height: 2.5px;
+    background-color: #fafbfc;
+}
+
+.menu-btn-custom .line-top {
+    width: 15px;
+}
+
+.menu-btn-custom .line-middle {
+    width: 30px;
+}
+
+.menu-btn-custom .line-bottom {
+    width: 20px;
+}
+
+/* 헤더 메뉴 부분 설정 */
+.header-inner nav {
+    display: flex;
+    gap: 24px;
+}
+
+.header-inner nav a {
+    transition: transform 0.1s linear;
+}
+
+.header-inner nav a:hover {
+    transform: translateY(-2px);
+}
+
+.header-inner a {
+    color: #ddd;
+    font-size: 1.15rem;
+}
+
+.header-inner a:nth-child(3) {
+    color: #0ffa4a;
+}
+
+/* 24기 포트폴리오 부분 전체 설정 */
+section {
+    padding: 10px;
+    margin: 0 120px;
+}
+
+/* 기수 명시 부분 */
+.group-portfolio .group-order {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.group-portfolio .group-order #group-current {
+    margin-left: 50%;
+    font-size: 25px;
+    color: #fafbfc;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.group-portfolio .group-order a {color: #fafbfc;}
+
+/* 포폴 카드별 설정 */
+.group-portfolio .curr-group-portfolio .curr-group {
+    position: relative;
+    background-color: #585a5c;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem;
+    border-radius: 10px;
+    margin: 15px 0;
+}
+
+.curr-group:hover {
+    transform: translateY(-2px);
+}
+
+.curr-group:hover .img-wrapper img {
+    transform: scale(1.1);
+}
+
+/* 카드별 사진 설정 */
+.img-wrapper {
+    width: 140px;
+    height: 100px;
+    margin: 5px;
+    border-radius: 8px;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+/* 포폴 카드별 프로젝트 정보 설정 */
+.group-portfolio .curr-group-portfolio .curr-group .curr-group-info h2 {
+    color: #fafbfc;
+    font-size: 22px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.group-portfolio .curr-group-portfolio .curr-group .curr-group-info p {
+    color: #cacbcc;
+}
+
+/* 포폴 카드별 참여 팀원 설정 */
+.group-portfolio .curr-group-portfolio .curr-group .curr-group-person {
+    display: flex;
+    gap: 10px;
+    margin-top: 2rem;
+}
+
+.group-portfolio .curr-group-portfolio .curr-group .curr-group-person p {
+    background-color: #97999c;
+    color: #000;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.group-portfolio .curr-group-portfolio .curr-group .curr-group-person .curr-group-head {
+    background-color: #478af5;
+    color: #fafbfc;
+}
+
+/* 카드별 햄버거 버튼 설정 */
+.info-btn-custom {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10;
+}
+
+.info-btn-custom .line {
+    display: block;
+    height: 2px;
+    background-color: #888888;
+    border-radius: 2px;
+}
+
+.info-btn-custom .line-top, .info-btn-custom .line-middle, .info-btn-custom .line-bottom {width: 20px;}
+
+.info-btn-custom .line-top {
+    transform-origin: left center;
+    transition: all 0.3s ease-in-out;
+}
+.info-btn-custom .line-bottom {
+    transform-origin: right center;
+    transition: all 0.3s ease-in-out;
+}
+
+.curr-group:hover .info-btn-custom .line-top {
+    transform: scaleX(0.5);
+}
+
+.curr-group:hover .info-btn-custom .line-bottom {
+    transform: scaleX(0.5);
+}
+
+/* 홈페이지 아래 정보 부분 설정 */
+.pirogramming-bottom {
+    background-color: #585a5c;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+}
+
+.pirogramming-bottom .pirogramming-info {
+    margin: 0 130px;
+}
+
+.pirogramming-rules a {
+    color: #f7f8fa;
+    display: inline-block;
+    transition: transform 0.1s linear;
+}
+
+.pirogramming-bottom .pirogramming-info p {
+    color: #f7f8fa;
+}
+
+.pirogramming-rules a:hover {
+    transform: translateY(-2px);
+}
+
+.pirogramming-info-group a:hover {
+    transform: translateY(-2px);
+}
+
+.pirogramming-info-gmail:hover {
+    transform: translateY(-2px);
+}
+
+.pirogramming-bottom .pirogramming-info .pirogramming-info-group {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 10px;
+    transition: transform 0.1s linear;
+}
+
+.pirogramming-bottom .pirogramming-info img {
+    max-width: 30px;
+    max-height: 30px;
+    border-radius: 50%;
+}
+
+.pirogramming-bottom .pirogramming-info .pirogramming-info-gmail {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: transform 0.1s linear;
+}
+
+.pirogramming-bottom .pirogramming-menu {
+    margin: 0 200px;
+}
+
+.pirogramming-bottom .pirogramming-menu nav {
+    display: flex;
+    white-space: nowrap;
+    flex-wrap:nowrap;
+    gap: 5px;
+}
+
+.pirogramming-bottom .pirogramming-menu a {
+    color: #f7f8fa;
+    display: inline-block;
+    transition: transform 0.1s linear;
+}
+
+.pirogramming-bottom .pirogramming-menu a:hover {
+    transform: translateY(-2px)
+}
+
+/* 풋터 설정 */
+.footer-inner {
+    background-color: #454647;
+    text-align: center;
+    padding: 15px;
+}
+
+.footer-inner p {
+    color: #cacbcc;
+    font-size: 13px;
+}
+
+/* 미디어 쿼리 케이스별 설정 */
+@media (max-width: 1080px) {
+    .group-portfolio {
+        margin: 0 1%;
+    }
+
+    .pirogramming-bottom {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .pirogramming-menu nav {
+        margin: 30px 0 0;
+    }
+}
+
+@media (max-width: 800px) {
+    .header-inner nav {
+        display: none;
+    }
+    .menu-btn-custom {
+        display: flex;
+    }
+}
+
+@media (max-width: 750px) {
+    .pirogramming-menu {
+        display: none;
+    }
+}
+
+@media (max-width: 650px) {
+    .curr-group {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap:15px;
+    }
+
+    .img-wrapper {
+        width: 55%;
+        height: 150px;
+    }
+
+    .curr-group-person {
+        justify-content: center;
+    }
+}
