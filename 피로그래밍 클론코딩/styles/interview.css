@@ -1,0 +1,358 @@
+/* 전체 배경색 지정 */
+body {background-color: #000;}
+
+/* 헤더 설정 */
+header {padding: 15px;}
+
+.header-inner {
+    position: relative;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    max-width: 71rem;
+    margin: 0 auto;
+}
+
+/* 헤더 메뉴 부분 햄버거 버튼 설정 */
+.menu-btn-custom {
+    display: none;
+
+    position: absolute;
+    top: 10px;
+    right: 5px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10;
+}
+
+.menu-btn-custom .line {
+    display: block;
+    height: 2.5px;
+    background-color: #fafbfc;
+}
+
+.menu-btn-custom .line-top {
+    width: 15px;
+}
+
+.menu-btn-custom .line-middle {
+    width: 30px;
+}
+
+.menu-btn-custom .line-bottom {
+    width: 20px;
+}
+
+/* 헤더 메뉴 부분 설정 */
+.header-inner nav {
+    display: flex;
+    gap: 24px;
+}
+
+.header-inner nav a {
+    transition: transform 0.1s linear;
+}
+
+.header-inner nav a:hover {
+    transform: translateY(-2px);
+}
+
+.header-inner a:nth-child(4) {
+    color: #0ffa4a;
+}
+
+.header-inner a {
+    color: #ddd;
+    font-size: 1.15rem;
+}
+
+/* 24기 인터뷰 부분 전체 설정 */
+section {
+    padding: 10px;
+    margin: 0 120px;
+}
+
+/* 기수 명시 부분 */
+.group-interview .group-order {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.group-interview .group-order #group-current {
+    margin-left: 50%;
+    font-size: 25px;
+    color: #fafbfc;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.group-interview .group-order a {color: #fafbfc;}
+
+/* 24기 인터뷰 모음 설정 - 그리드 */
+.group-interview .curr-group-interview {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 17px;
+}
+
+/* 인터뷰 개인 카드 설정 */
+.group-interview .curr-group-interview .curr-person-interview {
+    position: relative;
+    background-color: #585a5c;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.4rem;
+    border-radius: 15px;
+}
+
+.group-interview .curr-group-interview .curr-person-interview .curr-person-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 5px;
+}
+
+.curr-person-interview:hover {
+    transform: translateY(-2px);
+}
+
+/* 카드별 프로필 사진 설정 */
+.curr-person-interview:hover .img-wrapper img {
+    transform: scale(1.1);
+}
+
+.img-wrapper {
+    width: 75px;
+    height: 75px;
+    margin: 10px;
+    border-radius: 50%;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+/* 카드별 basic-info 부분 설정 */
+.group-interview .curr-group-interview .curr-person-interview .curr-person-info .basic-info h2 {
+    color: #fafbfc;
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+/* basic-info 중 전공 적용 설정 */
+.group-interview .curr-group-interview .curr-person-interview .curr-person-info .basic-info .person-status {
+    color: #fafbfc;
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.basic-info .major {
+    background-color: #478af5;
+}
+
+.basic-info .double-major {
+    background-color: #085b0f;
+}
+
+.basic-info .non-major {
+    background-color: #af4819;
+}
+
+/* 카드별 후기 설정 */
+.group-interview .curr-group-interview .curr-person-interview .curr-person-review {
+    color: #fafbfc;
+    margin-left: 10px;
+}
+
+/* 카드별 햄버거 버튼 설정 */
+.info-btn-custom {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10;
+}
+
+.info-btn-custom .line {
+    display: block;
+    height: 2px;
+    background-color: #888888;
+    border-radius: 2px;
+}
+
+.info-btn-custom .line-top, .info-btn-custom .line-middle, .info-btn-custom .line-bottom {width: 20px;}
+
+.info-btn-custom .line-top {
+    transform-origin: left center;
+    transition: all 0.3s ease-in-out;
+}
+.info-btn-custom .line-bottom {
+    transform-origin: right center;
+    transition: all 0.3s ease-in-out;
+}
+
+.curr-person-interview:hover .info-btn-custom .line-top {
+    transform: scaleX(0.5);
+}
+
+.curr-person-interview:hover .info-btn-custom .line-bottom {
+    transform: scaleX(0.5);
+}
+
+/* 홈페이지 아래 정보 부분 설정 */
+.pirogramming-bottom {
+    background-color: #585a5c;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+}
+
+.pirogramming-bottom .pirogramming-info {
+    margin: 0 130px;
+}
+
+.pirogramming-rules a {
+    color: #f7f8fa;
+    display: inline-block;
+    transition: transform 0.1s linear;
+}
+
+.pirogramming-bottom .pirogramming-info p {
+    color: #f7f8fa;
+}
+
+.pirogramming-rules a:hover {
+    transform: translateY(-2px);
+}
+
+.pirogramming-info-group a:hover {
+    transform: translateY(-2px);
+}
+
+.pirogramming-info-gmail:hover {
+    transform: translateY(-2px);
+}
+
+.pirogramming-bottom .pirogramming-info .pirogramming-info-group {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 10px;
+    transition: transform 0.1s linear;
+}
+
+.pirogramming-bottom .pirogramming-info img {
+    max-width: 30px;
+    max-height: 30px;
+    border-radius: 50%;
+}
+
+.pirogramming-bottom .pirogramming-info .pirogramming-info-gmail {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: transform 0.1s linear;
+}
+
+.pirogramming-bottom .pirogramming-menu {
+    margin: 0 200px;
+}
+
+.pirogramming-bottom .pirogramming-menu nav {
+    display: flex;
+    white-space: nowrap;
+    flex-wrap:nowrap;
+    gap: 5px;
+}
+
+.pirogramming-bottom .pirogramming-menu a {
+    color: #f7f8fa;
+    display: inline-block;
+    transition: transform 0.1s linear;
+}
+
+.pirogramming-bottom .pirogramming-menu a:hover {
+    transform: translateY(-2px)
+}
+
+/* 풋터 설정 */
+.footer-inner {
+    background-color: #454647;
+    text-align: center;
+    padding: 15px;
+}
+
+.footer-inner p {
+    color: #cacbcc;
+    font-size: 13px;
+}
+
+/* 미디어 쿼리 케이스별 설정 */
+@media (max-width: 1080px) {
+    .group-interview {
+        margin: 0 1%;
+    }
+
+    .pirogramming-bottom {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .pirogramming-menu nav {
+        margin: 30px 0 0;
+    }
+}
+
+@media (max-width: 850px) {
+    .group-interview .curr-group-interview {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 800px) {
+    .header-inner nav {
+        display: none;
+    }
+    .menu-btn-custom {
+        display: flex;
+    }
+}
+
+@media (max-width: 750px) {
+    .pirogramming-menu {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .group-interview .curr-group-interview {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
