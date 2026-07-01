@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ review.title }}</title>
+    <style>
+        body { font-family: sans-serif; max-width: 700px; margin: 50px auto; padding: 0 20px; }
+        .logo { font-size: 24px; font-weight: bold; text-decoration: none; color: black; display: inline-block; margin-bottom: 30px; }
+        .logo span { color: #e91e63; }
+        .info-box { border-bottom: 1px solid #ddd; padding-bottom: 15px; margin-bottom: 20px; }
+        .meta { color: #555; font-size: 15px; display: block; margin: 8px 0; }
+        .content { padding: 20px; background: #fafafa; border-radius: 8px; margin: 20px 0; white-space: pre-wrap; line-height: 1.6; }
+        .btn { padding: 8px 20px; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; color: white; display: inline-block; font-size: 14px; }
+        .btn-edit { background: #2196F3; }
+        .btn-delete { background: #f44336; }
+        .actions { margin-top: 30px; }
+    </style>
+</head>
+<body>
+
+    <a href="{% url 'review-list' %}" class="logo">my <span>Movie</span> reviews</a>
+
+    <h1>{{ review.title }}</h1>
+    
+    <div class="info-box">
+        <span class="meta"><strong>개봉년도:</strong> {{ review.release_year }}</span>
+        <span class="meta"><strong>감독:</strong> {{ review.director }}</span>
+        <span class="meta"><strong>주연:</strong> {{ review.actor }}</span>
+        <span class="meta"><strong>장르:</strong> {{ review.genre }}</span>
+        <span class="meta"><strong>별점:</strong> {{ review.rating }}</span>
+        <span class="meta"><strong>러닝타임:</strong> {{ review.running_time }}</span>
+    </div>
+
+    <div class="content">{{ review.content }}</div>
+
+    <div class="actions">
+        <a href="{% url 'review-update' review.pk %}" class="btn btn-edit">수정</a>
+        <a href="{% url 'review-delete' review.pk %}" class="btn btn-delete">삭제</a>
+    </div>
+
+</body>
+</html>

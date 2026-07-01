@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% if review %}리뷰 수정{% else %}새 리뷰 작성{% endif %}</title>
+    <style>
+        body { font-family: sans-serif; max-width: 700px; margin: 50px auto; padding: 0 20px; }
+        .logo { font-size: 24px; font-weight: bold; text-decoration: none; color: black; display: inline-block; margin-bottom: 30px; }
+        .logo span { color: #e91e63; }
+        input[type="text"], input[type="number"], textarea, select { 
+            width: 100%; padding: 10px; font-size: 14px; border: 1px solid #ddd; 
+            border-radius: 4px; box-sizing: border-box; font-family: sans-serif; margin-bottom: 5px;
+        }
+        textarea { height: 180px; resize: vertical; }
+        label { display: block; margin: 15px 0 5px; font-weight: bold; color: #333; }
+        .btn-group { margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px; text-align: right; }
+        .btn { padding: 10px 25px; border: none; border-radius: 4px; cursor: pointer; color: white; font-size: 14px; font-weight: bold; }
+        .btn-save { background: #4CAF50; }
+        .btn-back { background: #666; text-decoration: none; display: inline-block; margin-right: 10px; }
+    </style>
+</head>
+<body>
+
+    <a href="{% url 'review-list' %}" class="logo">my <span>Movie</span> reviews</a>
+    <h2>{% if review %}리뷰 수정{% else %}새 리뷰 작성{% endif %}</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>제목</label>
+        <input type="text" name="title" value="{{ review.title|default:'' }}" required>
+
+        <label>개봉년도</label>
+        <input type="text" name="release_year" value="{{ review.release_year|default:'' }}" placeholder="예: 2021년" required>
+
+        <label>장르</label>
+        <input type="text" name="genre" value="{{ review.genre|default:'' }}" placeholder="예: SF, 액션" required>
+
+        <label>별점</label>
+        <input type="number" name="rating" min="1" max="5" value="{{ review.rating|default:'' }}" placeholder="1~5 사이 숫자" required>
+
+        <label>러닝타임</label>
+        <input type="text" name="running_time" value="{{ review.running_time|default:'' }}" placeholder="예: 2시간 28분" required>
+
+        <label>리뷰 내용</label>
+        <textarea name="content" required>{{ review.content|default:'' }}</textarea>
+
+        <label>감독</label>
+        <input type="text" name="director" value="{{ review.director|default:'' }}" required>
+
+        <label>배우</label>
+        <input type="text" name="actor" value="{{ review.actor|default:'' }}" placeholder="여러 명일 경우 쉼표(,)로 구분" required>
+
+        <div class="btn-group">
+            <a href="{% url 'review-list' %}" class="btn btn-back">취소</a>
+            <button type="submit" class="btn btn-save">저장</button>
+        </div>
+    </form>
+</body>
+</html>
