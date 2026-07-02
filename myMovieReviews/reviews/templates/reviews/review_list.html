@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Movie Reviews</title>
+    <style>
+        body { font-family: sans-serif; max-width: 800px; margin: 50px auto; padding: 0 20px; }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #333; padding-bottom: 20px; margin-bottom: 30px; }
+        .logo { font-size: 26px; font-weight: bold; text-decoration: none; color: black; }
+        .logo span { color: #e91e63; }
+        .btn-create { background: #e91e63; color: white; text-decoration: none; padding: 10px 20px; border-radius: 4px; font-weight: bold; font-size: 14px; }
+        .btn-create:hover { background: #c2185b; }
+        
+        /* 리뷰 테이블 스타일 */
+        .review-table { width: 100%; border-collapse: collapse; margin-top: 20px; text-align: left; }
+        .review-table th, .review-table td { padding: 15px; border-bottom: 1px solid #ddd; }
+        .review-table th { background-color: #f8f9fa; color: #555; font-weight: bold; }
+        
+        /* 영화 제목 링크 스타일 */
+        .movie-title-link { color: #2196F3; text-decoration: none; font-weight: bold; font-size: 16px; }
+        .movie-title-link:hover { text-decoration: underline; color: #0d47a1; }
+        
+        .rating-stars { color: #ffb300; font-weight: bold; }
+        .empty-message { text-align: center; padding: 50px 0; color: #777; font-size: 16px; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <a href="{% url 'review-list' %}" class="logo">my <span>Movie</span> reviews</a>
+        <a href="{% url 'review-create' %}" class="btn-create">리뷰 작성</a>
+    </div>
+
+    {% if reviews %}
+        <table class="review-table">
+            <thead>
+                <tr>
+                    <th>영화 제목</th>
+                    <th>개봉 년도</th>
+                    <th>장르</th>
+                    <th>별점</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for review in reviews %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'review-detail' review.pk %}" class="movie-title-link">
+                                {{ review.title }}
+                            </a>
+                        </td>
+                        <td>{{ review.release_year }}</td>
+                        <td>{{ review.genre }}</td>
+                        <td>
+                            <span class="rating-stars">★ {{ review.rating }}</span>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="empty-message">
+            <p>아직 작성된 영화 리뷰가 없습니다. 첫 리뷰를 작성해 보세요! 🎬</p>
+        </div>
+    {% endif %}
+
+</body>
+</html>
