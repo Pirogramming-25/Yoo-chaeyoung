@@ -17,8 +17,8 @@ def devtool_create(request):
             name=name, kind=kind, content=content
         )
 
-        return redirect('devtool-list')
-    return render(request, "devtools/devtools_form.html")
+        return redirect('devtools:devtool-list')
+    return render(request, "devtools/devtool_form.html")
 
 
 def devtool_detail(request, pk):
@@ -35,6 +35,16 @@ def devtool_update(request, pk):
 
         devtool.save()
 
-        return redirect('devtool-detail', pk=pk)
+        return redirect('devtools:devtool-detail', pk=pk)
+    else :
+        context = {
+            "devtool": devtool
+        }
+        return render(request, "devtools/devtool_form.html", context)
+       
+
+def devtool_delete(request, pk):
+    idea = get_object_or_404(Devtool, pk=pk)
+    idea.delete()
     
-    return render(request, "devtools/devtool_form.html")
+    return redirect("devtools:devtool-list")

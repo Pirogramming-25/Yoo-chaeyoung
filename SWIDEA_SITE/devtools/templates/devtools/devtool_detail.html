@@ -1,0 +1,44 @@
+{% extends 'ideas/idea_list.html' %}
+
+{% block content %}
+<div class="devtool-detail-group">
+    <div class="devtool-detail-title">
+        <h2>DevTool Detail</h2>
+        <p>개발툴 세부내용 페이지 입니다. 자신이 사용가능한 개발툴에 대한 상세내용을 확인해 보세요.</p>
+    </div>
+            
+    <div class="devtool-detail-content">
+        <div class="devtool-info-group">
+            
+            <div class="devtool-header-row">
+                <h3 class="devtool-subject">{{ devtool.name }}</h3>
+            </div>
+
+            <div class="devtool-body-zone">
+                <p class="devtool-kind-tag">{{ devtool.kind }}</p>
+                <p class="devtool-desc-text">{{ devtool.content|linebreaksbr }}</p>
+            </div>
+            
+            <div class="devtool-sw-list">
+                <p class="devtool-sw-title">&gt; 만들 수 있는 SW 목록</p>
+                <ul class="devtool-sw-ul">
+                    {% for idea in devtool.ideas.all %}
+                        <li>
+                            <a href="{% url 'ideas:idea-detail' idea.pk %}">{{ idea.title }}</a>
+                        </li>
+                    {% empty %}
+                        <li class="devtool-no-sw">연결된 아이디어가 아직 없습니다.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="devtool-detail-button">
+        <a href="{% url 'devtools:devtool-delete' devtool.pk %}" class="devtool-btn devtool-delete-btn">삭제</a>
+        <a href="{% url 'devtools:devtool-list' %}" class="devtool-btn devtool-list-btn">목록</a>
+        <a href="{% url 'devtools:devtool-update' devtool.pk %}" class="devtool-btn devtool-edit-btn">수정</a>
+    </div>
+</div>
+{% endblock %}

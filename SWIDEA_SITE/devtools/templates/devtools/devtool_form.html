@@ -1,0 +1,38 @@
+{% extends 'ideas/idea_list.html' %}
+
+{% block content %}
+<div class="idea-form-group"> 
+    <div class="idea-form-title">
+        {% if devtool %}
+            <h2>DevTool Update</h2>
+            <p>개발툴 수정 페이지 입니다. 자신이 사용가능한 개발툴의 내용을 변경해 보세요.</p>
+        {% else %}
+            <h2>DevTool Register</h2>
+            <p>개발툴 등록 페이지 입니다. 자신이 사용가능한 개발툴을 등록해 보세요.</p>
+        {% endif %}
+    </div>
+            
+    <form method="POST" class="idea-form-content">
+        {% csrf_token %}
+        
+        <div class="form-row devtool-form-name">
+            <label>이름</label>
+            <input type="text" name="name" value="{% if devtool %}{{ devtool.name }}{% endif %}" placeholder="개발툴 명을 입력하세요" required>
+        </div>
+
+        <div class="form-row devtool-form-kind">
+            <label>종류</label>
+            <input type="text" name="kind" value="{% if devtool %}{{ devtool.kind }}{% endif %}" placeholder="개발툴 종류를 입력하세요 (예: 웹 프레임워크)" required>
+        </div>
+
+        <div class="form-row devtool-form-description">
+            <label>개발툴 설명</label>
+            <textarea name="content" rows="6" placeholder="개발툴에 대한 상세한 설명을 입력해주세요" required>{% if devtool %}{{ devtool.content }}{% endif %}</textarea>
+        </div>
+
+        <div class="idea-form-button">
+            <button type="submit" class="form-submit-btn">SUBMIT</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
