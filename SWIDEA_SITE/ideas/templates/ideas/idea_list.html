@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'ideas/css/reset.css' %}">
+    <link rel="stylesheet" href= "{% static 'ideas/css/main.css' %}">
+    <title>My SW Idea Manage</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a class="navbar-logo" href="{% url 'ideas:idea-list' %}">My <p>SW Idea</p> Manage</a>
+            <div class="navbar-info">
+                <a href="{% url 'ideas:idea-create' %}" class="navbar-link idea-register">아이디어 등록</a>
+                <a href="{% url 'ideas:idea-list' %}" class="navbar-link idea-manage">아이디어 관리</a>
+                <a href="{% url 'devtools:devtool-create' %}" class="navbar-link devtool-register">개발툴 등록</a>
+                <a href="{% url 'devtools:devtool-list' %}" class="navbar-link devtool-manage">개발툴 관리</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        <div class="idea-list-group">
+            <div class="idea-list-title">
+                <h2>Idea List</h2>
+                <p>나의 아이디어를 잊지 말고 기록해보세요</p>
+            </div>
+            
+            <select class="idea-list-sort" onchange="location.href='?sort=' + this.value;">
+                <option value="interest" {% if sort_key == 'interest' %}selected{% endif %}>찜하기순</option>
+                <option value="id" {% if sort_key == 'id' %}selected{% endif %}>등록순</option>
+                <option value="recent" {% if sort_key == 'recent' %}selected{% endif %}>최신순</option>
+                <option value="title" {% if sort_key == 'title' %}selected{% endif %}>이름순</option>
+            </select>
+            
+            <div class="idea-list-content">
+                {% for idea in ideas %}
+                <div class="idea-card">
+                    <div class="idea-card-cover">
+                        <span class="star-icon {% if idea.star_status.is_starred %}on{% else %}off{% endif %}" id="star-{{ idea.pk }}" 
+                        onclick="toggleStar('{{ idea.pk }}')">
+                            ★
+                        </span>
+                        {% if idea.image %}
+                            <img src="{{ idea.image.url }}" class="card-image">
+                        {% else %}
+                            <div class="no-image">No Image</div>
+                        {% endif %}
+                        <h5><a href="{% url 'ideas:idea-detail' idea.pk %}">{{ idea.title }}</a></h5>
+                    </div>
+                    
+                    <div class="idea-card-info">
+                        <p class="idea-info idea-devtool">예상 개발 툴 : {% if idea.devtool %}{{ idea.devtool.name }}{% else %}선택 안 됨{% endif %}</p>
+                        
+                        <div class="idea-interest">
+                            <div class="idea-info idea-interest-txt">
+                                <span>아이디어 관심도 : </span>
+                                <span class="interest-btn plus" style="cursor:pointer;">+</span>
+                                <span class="interest-num">{{ idea.interest }}</span>
+                                <span class="interest-btn minus" style="cursor:pointer;">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="no-contents">등록된 아이디어가 없습니다.</div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <script>
+            function changeInterest(ideaId, actionType) {
+                const url = `/ideas/${ideaId}/update-interest/`;
+                let formData = new FormData();
+                formData.append('action', actionType);
+                fetch(url, { method: 'POST', body: formData })
+                .then(response => response.json())
+                .then(data => { if (data.success) { document.getElementById(`interest-val-${ideaId}`).innerText = data.new_interest; } })
+                .catch(error => console.error('Error:', error));
+            }
+
+            function toggleStar(ideaId) {
+                const url = `/ideas/${ideaId}/toggle-star/`;
+                fetch(url, { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const starElement = document.getElementById(`star-${ideaId}`);
+                        if (data.is_starred) {
+                            starElement.classList.remove('off');
+                            starElement.classList.add('on');
+                        } else {
+                            starElement.classList.remove('on');
+                            starElement.classList.add('off');
+                        }
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            }
+        </script>
+        {% endblock %}
+    </main>
+</body>
+</html>

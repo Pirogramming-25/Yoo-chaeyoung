@@ -1,0 +1,739 @@
+body {
+    background-image: url('../images/bg-img.jpg'); 
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    color: #ffffff; 
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* 헤더 관련 스타일 */
+header {
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header .navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    border-bottom: 1px solid #6e6e7a;
+}
+
+header .navbar-logo {
+    color:#ffffff;
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+}
+
+header .navbar-logo p {
+    color: #bae468;
+}
+
+header .navbar-info {
+    display: flex;
+    text-align: center;
+    gap: 200px;
+}
+
+header .navbar-info .navbar-link {
+    color: #ffffff;
+}
+
+/* ==========================================
+   2. 메인 페이지 스타일 (아이디어 리스트)
+   ========================================== */
+main .idea-list-group {
+    max-width: 1200px;
+    height: 600px;
+    margin: 60px auto;
+    padding: 40px;
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);     
+    border-radius: 4px;
+}
+
+main .idea-list-group .idea-list-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.idea-list-group .idea-list-title h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ccff33;
+    margin-bottom: 8px;
+}
+
+.idea-list-group .idea-list-title p {
+    font-size: 0.95rem;
+    color: #e2e8f0;
+}
+
+main .idea-list-group .idea-list-sort {
+    height: 30px;
+    width: 80px;
+    display: block;
+    margin-left: auto;
+    margin-bottom: 25px;
+    padding: 6px 12px;
+    background-color: #ffffff;
+    color: #333333;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    font-size: 0.78rem;
+    text-align: center;
+    cursor: pointer;
+}
+
+main .idea-list-group .idea-list-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+main .idea-list-group .idea-card {
+    background-color: #dbeafe;
+    color: #1e293b;
+    width: calc(25% - 15px);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.idea-list-group .idea-card .idea-card-cover {
+    position: relative;
+    padding: 10px;
+    border-bottom: 1px solid #cbd5e1;
+}
+
+.star-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 999; 
+    
+    transition: color 0.2s ease;
+}
+
+.star-icon.on {
+    color: #fbbf24;
+}
+
+.star-icon.off {
+    color: #94a3b8;
+}
+
+.idea-card-cover .card-image,
+.idea-card-cover .no-image {
+    max-width: 100%;
+    height: 200px;
+    object-fit: contain;
+    background-color: #f8fafc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    font-weight: 600;
+}
+
+.idea-card .idea-card-cover h5 {
+    margin-top: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: left;
+    width: 100%;
+}
+
+.idea-card .idea-card-cover h5 a {
+    text-decoration: none;
+    color: #1e293b;
+}
+
+/* 카드 하단 정보 */
+.idea-card .idea-card-info {
+    padding: 10px;
+    font-size: 0.85rem;
+    margin-top: auto;
+    margin-bottom: 20px;
+}
+
+.idea-card .idea-card-info .idea-info {
+    margin-bottom: 8px;
+}
+
+.idea-card-info .idea-info.idea-interest-txt {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.idea-info.idea-interest-txt span
+.idea-info.idea-interest-txt .interest-btn {
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 0 4px;
+    user-select: none;
+}
+
+.idea-info.idea-interest-txt .interest-btn {
+    cursor: pointer;
+    font-weight: bold;
+    user-select: none;
+    padding: 0 4px;
+}
+
+.idea-interest-txt .minus-btn {
+    color: #ef4444;
+    margin-left: 5px;
+}
+
+.idea-interest-txt .plus-btn {
+    color: #3b82f6;
+}
+
+.idea-info.idea-interest-txt .interest-num {
+    font-weight: 700;
+}
+
+.no-contents {
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+    padding: 40px 0;
+    font-style: italic;
+}
+
+/* ==========================================
+   3. 폼 페이지 스타일 (아이디어 등록 및 수정)
+   ========================================== */
+
+.idea-form-group {
+    max-width: 1200px;
+    height: 600px;
+    margin: 60px auto;
+    padding: 40px;
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);     
+    border-radius: 4px;
+}
+
+.idea-form-group .idea-form-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.idea-form-title h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ccff33;
+    margin-bottom: 8px;
+}
+
+.idea-form-title p {
+    font-size: 0.95rem;
+    color: #e2e8f0;
+}
+
+.idea-form-content {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-row {
+    display: flex;
+    align-items: flex-start;
+}
+
+.form-row label {
+    width: 140px;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    padding-top: 8px;
+}
+
+.form-row input[type="text"],
+.form-row input[type="number"],
+.form-row textarea,
+.form-row select {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #1e293b;
+    font-size: 0.95rem;
+    font-family: inherit;
+    outline: none;
+}
+
+.img-input-box {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: #ffffff;
+}
+
+.current-img {
+    font-size: 0.85rem;
+    color: #cbd5e1;
+}
+
+.current-img a {
+    color: #38bdf8;
+}
+
+.idea-form-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.form-submit-btn {
+    padding: 12px 40px;
+    background-color: #ffffff;
+    color: #1e293b;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+}
+
+/* ==========================================
+   4. 디테일 페이지 스타일 (아이디어 상세)
+   ========================================== */
+.idea-detail-group {
+    max-width: 1200px;
+    height: 600px;
+    margin: 60px auto;
+    padding: 40px;
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);     
+    border-radius: 4px;
+}
+
+.idea-detail-group .idea-detail-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.idea-detail-title h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ccff33;
+    margin-bottom: 8px;
+}
+
+.idea-detail-title p {
+    font-size: 0.95rem;
+    color: #e2e8f0;
+}
+
+.idea-detail-group .idea-detail-content {
+    max-width: 100%;
+    border: 1px solid #cbd5e1;
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 30px;
+}
+
+.detail-image,
+.detail-no-image {
+    width: 380px;
+    height: 280px;
+    object-fit: contain;
+    background-color: #ffffff;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.detail-info-group {
+    flex: 1;
+}
+
+.detail-info-group .detail-header-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
+    padding-bottom: 12px;
+}
+
+.detail-info-group .detail-header-row h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+}
+
+.detail-info-group .detail-interest,
+.detail-info-group .detail-devtool,
+.detail-info-group .detail-info {
+    margin-bottom: 20px;
+}
+
+.detail-info-group .detail-info {
+    margin-bottom: 0;
+}
+
+.detail-info-group .info-label {
+    font-size: 0.95rem;
+    color: #cbd5e1;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+.detail-info-group .info-value {
+    font-size: 0.95rem;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.idea-detail-button {
+    display: flex;
+    justify-content: center;
+    gap: 45px;
+    margin-top: 35px;
+}
+
+.idea-detail-button .detail-btn {
+    display: inline-block;
+    padding: 10px 28px;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+}
+
+.idea-detail-button .detail-btn.detail-delete-btn {
+    background-color: #ef4444;
+    color: #ffffff;
+}
+
+.idea-detail-button .detail-btn.detail-list-btn {
+    background-color: #ffffff;
+    color: #1e293b;
+}
+
+.idea-detail-button .detail-btn.detail-edit-btn {
+    background-color: #093c84;
+    color: #ffffff;
+}
+
+/* ==========================================
+   5. devtools 앱 - 개발툴 목록 스타일
+   ========================================== */
+
+.devtool-list-group {
+    max-width: 1200px;
+    height: 600px;
+    margin: 60px auto;
+    padding: 40px;
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);     
+    border-radius: 4px;
+}
+
+.devtool-list-group .devtool-list-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.devtool-list-title h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ccff33;
+    margin-bottom: 8px;
+}
+
+.devtool-list-title p {
+    font-size: 0.95rem;
+    color: #e2e8f0;
+}
+
+.devtool-list-content {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.devtool-item {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.devtool-item .tool-name {
+    width: 150px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.devtool-item .tool-name a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.devtool-item .tool-kind {
+    width: 180px;
+    color: #cbd5e1;
+    font-size: 0.9rem;
+    font-weight: 500;
+    flex-shrink: 0;
+}
+
+.devtool-item .tool-desc {
+    flex: 1;
+    color: #f1f5f9;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ==========================================
+   6. devtools 앱 - 개발툴 등록
+   ========================================== */
+
+.idea-form-group {
+    max-width: 1200px;
+    height: 600px;
+    margin: 60px auto;
+    padding: 40px;
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);     
+    border-radius: 4px;
+}
+
+.idea-form-group .idea-form-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.idea-form-title h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ccff33;
+    margin-bottom: 8px;
+}
+
+.idea-form-title p {
+    font-size: 0.95rem;
+    color: #e2e8f0;
+}
+
+.devtool-form-name,
+.devtool-form-kind,
+.devtool-form-description {
+    display: flex;
+    align-items: flex-start;
+}
+
+.devtool-form-name label,
+.devtool-form-kind label,
+.devtool-form-description label {
+    width: 140px;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    padding-top: 8px;
+    flex-shrink: 0;
+}
+
+.devtool-form-name input,
+.devtool-form-kind input,
+.devtool-form-description textarea {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.9); 
+    color: #1e293b;
+    font-size: 0.95rem;
+    font-family: inherit;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.devtool-form-description textarea {
+    resize: vertical;
+    min-height: 180px;
+}
+
+.devtool-form-name input:focus,
+.devtool-form-kind input:focus,
+.devtool-form-description textarea:focus {
+    border-color: #ccff33;
+    box-shadow: 0 0 0 2px rgba(204, 255, 51, 0.2);
+}
+
+/* ==========================================
+   7. devtools 앱 - 개발툴 상세 페이지
+   ========================================== */
+.devtool-detail-group {
+    max-width: 1200px;
+    height: 600px;
+    margin: 60px auto;
+    padding: 40px;
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);     
+    border-radius: 4px;
+}
+
+.devtool-detail-group .devtool-detail-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.devtool-detail-title h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ccff33;
+    margin-bottom: 8px;
+}
+
+.devtool-detail-title p {
+    font-size: 0.95rem;
+    color: #e2e8f0;
+}
+
+.devtool-detail-content {
+    max-width: 100%;
+    border: 1px solid #cbd5e1;
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    padding: 30px;
+    border-radius: 6px;
+}
+
+.devtool-info-group {
+    width: 100%;
+}
+
+.devtool-header-row {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+}
+
+.devtool-subject {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+}
+
+.devtool-kind-tag {
+    color: #cbd5e1;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.devtool-desc-text {
+    font-size: 1.05rem;
+    color: #ffffff;
+    line-height: 1.5;
+    margin-bottom: 0;
+}
+
+.devtool-sw-list {
+    margin-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 20px;
+}
+
+.devtool-sw-title {
+    color: #ccff33;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.devtool-sw-ul {
+    list-style: none;
+    padding-left: 5px;
+}
+
+.devtool-sw-ul li {
+    margin-bottom: 8px;
+}
+
+.devtool-sw-ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.devtool-sw-ul li a:hover {
+    color: #ccff33;
+    text-decoration: underline;
+}
+
+.devtool-no-sw {
+    color: #cbd5e1;
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+.devtool-detail-button {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 35px;
+}
+
+.devtool-detail-button .devtool-btn {
+    display: inline-block;
+    padding: 10px 28px;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+}
+
+.devtool-detail-button .devtool-btn.devtool-delete-btn {
+    background-color: #ef4444;
+    color: #ffffff
+}
+
+.devtool-detail-button .devtool-btn.devtool-list-btn {
+    background-color: #ffffff;
+    color: #1e293b
+}
+
+.devtool-detail-button .devtool-btn.devtool-edit-btn {
+    background-color: #6366f1;
+    color: #ffffff
+}

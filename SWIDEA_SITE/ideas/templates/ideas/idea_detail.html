@@ -1,0 +1,43 @@
+{% extends 'ideas/idea_list.html' %}
+
+{% block content %}
+<div class="idea-detail-group">
+    <div class="idea-detail-title">
+        <h2>Idea Detail</h2>
+        <p>아이디어 세부내용 페이지 입니다. 당신이 구현하려 한 아이디어들을 자세히 살펴보세요.</p>
+    </div>
+            
+    <div class="idea-detail-content">
+        {% if idea.image %}
+            <img src="{{ idea.image.url }}" class="detail-image" alt="{{ idea.title }}">
+        {% else %}
+            <div class="detail-no-image">No Image</div>
+        {% endif %}
+        <div class="detail-info-group">
+            <div class="detail-header-row">
+                <h3 class="detail-subject">{{ idea.title }}</h3>
+                <span class="detail-star">★</span>
+            </div>
+            <div class="detail-interest">
+                <p class="info-label">1) 아이디어 관심도</p>
+                <p class="info-value">{{ idea.interest }}</p>
+            </div>
+            <div class="detail-devtool">
+                <p class="info-label">2) 예상 개발 툴</p>
+                <p class="info-value">
+                    {% if idea.devtool %}{{ idea.devtool.name }}{% else %}선택 안 됨{% endif %}
+                </p>
+            </div>
+            <div class="detail-info">
+                <p class="info-label">3) 아이디어 설명</p>
+                <p class="info-value desc-text">{{ idea.content|linebreaksbr }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="idea-detail-button">
+        <a href="{% url 'ideas:idea-delete' idea.pk %}" class="detail-btn detail-delete-btn">삭제</a>
+        <a href="{% url 'ideas:idea-list' %}" class="detail-btn detail-list-btn">목록</a>
+        <a href="{% url 'ideas:idea-update' idea.pk %}" class="detail-btn detail-edit-btn">수정</a>
+    </div>
+</div>
+{% endblock%}

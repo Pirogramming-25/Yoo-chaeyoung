@@ -1,0 +1,59 @@
+{% extends 'ideas/idea_list.html' %}
+
+{% block content %}
+<div class="idea-form-group">
+    <div class="idea-form-title">
+        {% if idea %}
+            <h2>Idea Detail Update</h2>
+            <p>아이디어 세부내용 수정 페이지 입니다. 아이디어를 구체화하거나 내용을 변경해 보아요.</p>
+        {% else %}
+            <h2>Idea Register</h2>
+            <p>아이디어 등록 페이지 입니다. 당신의 아이디어를 잊지 말고 기록하세요!</p>
+        {% endif %}
+    </div>
+            
+    <form method="POST" enctype="multipart/form-data" class="idea-form-content">
+        {% csrf_token %}
+        <div class="form-row idea-form-name">
+            <label>아이디어명</label>
+            <input type="text" name="title" value="{% if idea %}{{ idea.title }}{% endif %}" placeholder="아이디어명을 입력하세요" required>
+        </div>
+
+        <div class="form-row idea-form-img">
+            <label>Image</label>
+            <div class="img-input-box">
+                {% if idea and idea.image %}
+                    <p class="current-img">현재 파일: <a href="{{ idea.image.url }}" target="_blank">{{ idea.image.name }}</a></p>
+                {% endif %}
+                <input type="file" name="image">
+            </div>
+        </div>
+
+        <div class="form-row idea-form-description">
+            <label>아이디어 설명</label>
+            <textarea name="content" rows="5" placeholder="아이디어를 상세히 설명해주세요" required>{% if idea %}{{ idea.content }}{% endif %}</textarea>
+        </div>
+
+        <div class="form-row idea-form-interest">
+            <label>아이디어 관심도</label>
+            <input type="number" name="interest" value="{% if idea %}{{ idea.interest }}{% else %}0{% endif %}" min="0" required>
+        </div>
+
+        <div class="form-row idea-form-devtool">
+            <label>예상 개발툴</label>
+            <select name="devtool">
+                <option value="">-- 선택 안 함 --</option>
+                {% for tool in devtools %}
+                    <option value="{{ tool.pk }}" {% if idea and idea.devtool.pk == tool.pk %}selected{% endif %}>
+                        {{ tool.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="idea-form-button">
+            <button type="submit" class="form-btn form-submit-btn">SUBMIT</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
