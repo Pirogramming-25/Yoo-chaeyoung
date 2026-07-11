@@ -1,0 +1,16 @@
+{% extends 'feeds/base.html' %}
+
+{% block content %}
+<main class="piro-main-content form-page">
+    <h2>스토리 만들기</h2>
+    <form method="post" enctype="multipart/form-data" class="simple-form">
+        {% csrf_token %}
+        <label>
+            이미지
+            <input type="file" name="image" accept="image/*" required>
+        </label>
+        <button type="submit">업로드</button>
+    </form>
+</main>
+<aside class="piro-right-spacer" aria-hidden="true"></aside>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'feeds/base.html' %}
+
+{% block content %}
+<main class="piro-main-content feed-detail-page">
+    <article class="feed-detail">
+        <img class="feed-detail-image" src="{{ feed.image.url }}" alt="게시글">
+
+        <div class="feed-detail-body">
+            <p class="feed-detail-author">{{ feed.author.username }}</p>
+            <p class="feed-detail-content">{{ feed.content }}</p>
+
+            <div class="feed-detail-actions">
+                <a href="{% url 'feeds:feed_like' feed.id %}" class="like-btn {% if current_user in feed.like_users.all %}liked{% endif %}">
+                    좋아요 {{ feed.like_users.count }}
+                </a>
+            </div>
+
+            <ul class="comment-list">
+                {% for comment in feed.comments.all %}
+                <li>
+                    <strong>{{ comment.author.username }}</strong> {{ comment.content }}
+                    {% if comment.author == current_user %}
+                    <form action="{% url 'feeds:comment_delete' feed.id comment.id %}" method="post" class="inline-form">
+                        {% csrf_token %}
+                        <button type="submit">삭제</button>
+                    </form>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+
+            <form action="{% url 'feeds:comment_create' feed.id %}" method="post" class="comment-form">
+                {% csrf_token %}
+                <input type="text" name="content" placeholder="댓글 달기..." required>
+                <button type="submit">게시</button>
+            </form>
+
+            {% if feed.author == current_user %}
+            <div class="feed-owner-actions">
+                <a href="{% url 'feeds:feed_update' feed.id %}">수정</a>
+                <form action="{% url 'feeds:feed_delete' feed.id %}" method="post" class="inline-form">
+                    {% csrf_token %}
+                    <button type="submit">삭제</button>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+    </article>
+</main>
+<aside class="piro-right-spacer" aria-hidden="true"></aside>
+{% endblock %}

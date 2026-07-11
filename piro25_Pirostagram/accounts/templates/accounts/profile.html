@@ -1,0 +1,56 @@
+{% extends 'feeds/base.html' %}
+
+{% block content %}
+<main class="piro-main-content profile-page">
+    <section class="profile-section">
+        <div class="profile-header">
+            <div class="profile-avatar">
+                {% if target_profile.profile_image %}
+                    <img alt="{{ target_user.username }}" src="{{ target_profile.profile_image.url }}">
+                {% else %}
+                    <img alt="{{ target_user.username }}" src="/media/profile_pics/default.png">
+                {% endif %}
+            </div>
+
+            <div class="profile-info">
+                <div class="profile-name-row">
+                    <h2 class="profile-username">{{ target_user.username }}</h2>
+
+                    {% if is_own_profile %}
+                        <span class="profile-action-btn profile-action-muted">프로필 수정하기</span>
+                    {% else %}
+                        <a href="{% url 'accounts:follow' target_user.id %}" class="profile-action-btn {% if is_following %}profile-action-following{% else %}profile-action-follow{% endif %}">
+                            {% if is_following %}팔로잉{% else %}팔로우{% endif %}
+                        </a>
+                    {% endif %}
+                </div>
+
+                <ul class="profile-stats">
+                    <li><strong>{{ post_count }}</strong> 게시물</li>
+                    <li><strong>{{ follower_count }}</strong> 팔로워</li>
+                    <li><strong>{{ following_count }}</strong> 팔로우</li>
+                </ul>
+
+                <p class="profile-bio">{{ target_profile.bio|default:"소개글이 없습니다." }}</p>
+            </div>
+        </div>
+
+        <div class="profile-feed-grid">
+            {% for feed in feeds %}
+            <a href="{% url 'feeds:feed_detail' feed.id %}" class="feed-card">
+                <img alt="게시글" src="{{ feed.image.url }}">
+            </a>
+            {% empty %}
+            <div class="profile-empty">
+                <p>아직 게시물이 없습니다!</p>
+                {% if is_own_profile %}
+                <p>나만의 게시글을 만들어보세요!</p>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+
+<aside class="piro-right-spacer" aria-hidden="true"></aside>
+{% endblock %}

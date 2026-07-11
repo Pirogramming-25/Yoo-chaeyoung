@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Pirostagram{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="piro-container">
+        <nav class="piro-sidebar">
+            <h1 class="sidebar-logo"><a href="{% url 'feeds:home' %}">Pirostagram</a></h1>
+
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="{% url 'feeds:home' %}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/>
+                            <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        </svg>
+                        <p>홈</p>
+                    </a>
+                </li>
+
+                <li class="sidebar-user-search">
+                    <label for="user-search">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/>
+                        </svg>
+                        <p>유저 검색</p>
+                    </label>
+
+                    <form action="{% url 'accounts:user_search' %}" method="get" class="search-form">
+                        <input type="text" id="user-search" name="search_username" placeholder="유저 검색">
+                        <button type="submit" class="search-btn">검색</button>
+                    </form>
+                </li>
+
+                <li>
+                    <a href="{% url 'feeds:feed_create' %}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="18" height="18" x="3" y="3" rx="2"/>
+                            <path d="M8 12h8"/>
+                            <path d="M12 8v8"/>
+                        </svg>
+                        <p>게시글 만들기</p>
+                    </a>
+                </li>
+
+                {% if current_user %}
+                <li>
+                    <a href="{% url 'accounts:profile' current_user.id %}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="10" cy="8" r="5"/>
+                            <path d="M2 21a8 8 0 0 1 12.664-6.5"/>
+                        </svg>
+                        <p>프로필</p>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+
+        <div class="piro-content-area">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
