@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>유저 검색 - Pirostagram</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body class="search-page-body">
+    <div class="search-page">
+        <h1 class="search-page-logo">Pirostagram</h1>
+
+        {% if search_username %}
+        <p class="search-page-query">"{{ search_username }}"로 검색한 결과</p>
+        {% endif %}
+
+        <ul class="search-results">
+            {% for item in users_data %}
+            <li class="search-result-item">
+                <a href="{% url 'accounts:profile' item.user.id %}" class="search-result-profile">
+                    {% if item.profile.profile_image %}
+                        <img alt="{{ item.user.username }}" src="{{ item.profile.profile_image.url }}">
+                    {% else %}
+                        <img alt="{{ item.user.username }}" src="/media/profile_pics/default.png">
+                    {% endif %}
+                    <div class="search-result-info">
+                        <strong>{{ item.user.username }}</strong>
+                        <span>{{ item.user.username }}</span>
+                    </div>
+                </a>
+                <a href="{% url 'accounts:follow' item.user.id %}" class="search-follow-btn {% if item.is_following %}search-following-btn{% endif %}">
+                    {% if item.is_following %}팔로잉{% else %}팔로우{% endif %}
+                </a>
+            </li>
+            {% empty %}
+            <li class="search-no-result">검색 결과가 없습니다.</li>
+            {% endfor %}
+        </ul>
+
+        <a href="{% url 'feeds:home' %}" class="search-back-link">홈으로 돌아가기</a>
+    </div>
+</body>
+</html>

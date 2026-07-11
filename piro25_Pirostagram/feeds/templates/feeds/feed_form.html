@@ -1,0 +1,20 @@
+{% extends 'feeds/base.html' %}
+
+{% block content %}
+<main class="piro-main-content form-page">
+    <h2>{% if feed %}게시글 수정{% else %}게시글 만들기{% endif %}</h2>
+    <form method="post" enctype="multipart/form-data" class="simple-form">
+        {% csrf_token %}
+        <label>
+            이미지
+            <input type="file" name="image" accept="image/*" {% if not feed %}required{% endif %}>
+        </label>
+        <label>
+            내용
+            <textarea name="content" rows="4" required>{% if feed %}{{ feed.content }}{% endif %}</textarea>
+        </label>
+        <button type="submit">{% if feed %}수정{% else %}게시{% endif %}</button>
+    </form>
+</main>
+<aside class="piro-right-spacer" aria-hidden="true"></aside>
+{% endblock %}

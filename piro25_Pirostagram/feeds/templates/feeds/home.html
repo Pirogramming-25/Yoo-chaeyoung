@@ -1,0 +1,94 @@
+{% extends 'feeds/base.html' %}
+
+{% block content %}
+<main class="piro-main-content">
+    <div class="stories-row">
+        <div class="story-item">
+            <a href="{% url 'feeds:story_create' %}" class="story-link">
+                <div class="story-circle story-circle-add">
+                    {% if my_profile.profile_image %}
+                        <img alt="내 프로필" src="{{ my_profile.profile_image.url }}">
+                    {% else %}
+                        <img alt="기본 프로필" src="/media/profile_pics/default.png">
+                    {% endif %}
+                </div>
+            </a>
+            <span class="story-username"><a href="{% url 'feeds:story_create' %}">스토리 +</a></span>
+        </div>
+
+        {% for item in story_users %}
+        <div class="story-item">
+            <button type="button" class="story-link story-open-btn" data-story-index="{{ forloop.counter0 }}">
+                <div class="story-circle story-circle-active">
+                    {% if item.profile.profile_image %}
+                        <img alt="{{ item.user.username }}" src="{{ item.profile.profile_image.url }}">
+                    {% else %}
+                        <img alt="{{ item.user.username }}" src="/media/profile_pics/default.png">
+                    {% endif %}
+                </div>
+            </button>
+            <span class="story-username">{{ item.user.username }}</span>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="followed-profiles">
+        {% for user_data in followed_users_data %}
+        <section class="profile-section">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    {% if user_data.profile.profile_image %}
+                        <img alt="{{ user_data.user.username }}" src="{{ user_data.profile.profile_image.url }}">
+                    {% else %}
+                        <img alt="{{ user_data.user.username }}" src="/media/profile_pics/default.png">
+                    {% endif %}
+                </div>
+
+                <div class="profile-info">
+                    <div class="profile-name-row">
+                        <h2 class="profile-username">
+                            <a href="{% url 'accounts:profile' user_data.user.id %}">{{ user_data.user.username }}</a>
+                        </h2>
+                    </div>
+
+                    <ul class="profile-stats">
+                        <li><strong>{{ user_data.post_count }}</strong> 게시물</li>
+                        <li><strong>{{ user_data.follower_count }}</strong> 팔로워</li>
+                        <li><strong>{{ user_data.following_count }}</strong> 팔로우</li>
+                    </ul>
+
+                    <p class="profile-bio">{{ user_data.profile.bio }}</p>
+                </div>
+            </div>
+
+            <div class="profile-feed-grid">
+                {% for feed in user_data.feeds %}
+                <a href="{% url 'feeds:feed_detail' feed.id %}" class="feed-card">
+                    <img alt="게시글" src="{{ feed.image.url }}">
+                </a>
+                {% empty %}
+                <p class="no-feeds">아직 게시물이 없습니다.</p>
+                {% endfor %}
+            </div>
+        </section>
+        {% empty %}
+        <p class="no-followings">팔로우한 사용자가 없습니다. 유저 검색에서 팔로우해보세요!</p>
+        {% endfor %}
+    </div>
+</main>
+
+<aside class="piro-right-spacer" aria-hidden="true"></aside>
+
+<div id="story-modal" class="story-modal" hidden>
+    <div class="story-modal-backdrop"></div>
+    <div class="story-modal-box">
+        <button type="button" class="story-modal-close" aria-label="닫기">&times;</button>
+        <button type="button" class="story-modal-nav story-modal-prev" aria-label="이전">&lsaquo;</button>
+        <div class="story-modal-image-wrap">
+            <img id="story-modal-image" src="" alt="스토리">
+        </div>
+        <button type="button" class="story-modal-nav story-modal-next" aria-label="다음">&rsaquo;</button>
+        <p id="story-modal-username" class="story-modal-username"></p>
+    </div>
+</div>
+{% endblock %}
