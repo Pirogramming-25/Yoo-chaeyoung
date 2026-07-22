@@ -1,0 +1,17 @@
+{% extends 'my_gpt/base.html' %}
+
+{% block content %}
+<h2>로그인</h2>
+
+{% if request.GET.required == "1" %}
+  <script>
+    alert("로그인 후 이용해주세요");
+  </script>
+{% endif %}
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">로그인</button>
+</form>
+{% endblock %}

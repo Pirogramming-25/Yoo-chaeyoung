@@ -1,0 +1,46 @@
+{% extends 'my_gpt/base.html' %}
+
+{% block content %}
+<h2>감정 분석</h2>
+<p><strong>사용 모델:</strong> cardiffnlp/twitter-roberta-base-sentiment-latest</p>
+<p><strong>입력 언어:</strong> 영어 (1자 ~ 1,000자)</p>
+
+<form method="post" onsubmit="showLoading()">
+    {% csrf_token %}
+    <textarea name="text" rows="5" cols="60" placeholder="영어 문장을 입력하세요..."></textarea><br><br>
+    <button type="submit" id="submit-btn">분석 실행</button>
+</form>
+
+<div id="loading">처리 중... 잠시만 기다려주세요.</div>
+
+{% if error %}
+    <div class="error-msg">{{ error }}</div>
+{% endif %}
+
+{% if result %}
+    <div class="result-box">
+        <h3>[분석 결과]</h3>
+        <p><strong>주요 감정:</strong> {{ result.top_label }}</p>
+        <p><strong>신뢰도:</strong> {{ result.top_score }}</p>
+        <hr>
+        <h4>전체 레이블 점수:</h4>
+        <ul>
+            {% for item in result.all_scores %}
+                <li>{{ item.label }}: {{ item.score }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+<hr>
+<h3>최근 실행 기록 (최대 5개)</h3>
+{% if histories %}
+    <ul>
+        {% for h in histories %}
+            <li>[{{ h.created_at|date:"Y-m-d H:i" }}] {{ h.input_text|truncatechars:30 }} &rarr; {{ h.output_text }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>최근 기록이 없습니다.</p>
+{% endif %}
+{% endblock %}
