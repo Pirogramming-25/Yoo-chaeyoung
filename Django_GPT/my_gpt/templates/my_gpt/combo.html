@@ -1,0 +1,45 @@
+{% extends 'my_gpt/base.html' %}
+
+{% block content %}
+<h2>복합 분석</h2>
+<p><strong>사용 기능:</strong> 문서 요약 &rarr; 요약문 감정 분석 &rarr; 원문 유해성 분석</p>
+<p><strong>입력 언어:</strong> 영어 (200자 ~ 5,000자)</p>
+
+<form method="post" onsubmit="showLoading()">
+    {% csrf_token %}
+    <textarea name="text" rows="8" cols="60" placeholder="복합 분석을 진행할 긴 영어 문서를 입력하세요..."></textarea><br><br>
+    <button type="submit" id="submit-btn">복합 분석 실행</button>
+</form>
+
+<div id="loading">파이프라인 체이닝 실행 중... (시간이 조금 더 걸릴 수 있습니다)</div>
+
+{% if error %}
+    <div class="error-msg">{{ error }}</div>
+{% endif %}
+
+{% if result %}
+    <div class="result-box">
+        <h3>1. 요약 결과</h3>
+        <p>{{ result.summary.summary }}</p>
+        <p><em>(원문 대비 요약 비율: {{ result.summary.ratio }})</em></p>
+        <hr>
+        <h3>2. 요약문 감정 분석</h3>
+        <p>감정: {{ result.sentiment.top_label }} ({{ result.sentiment.top_score }})</p>
+        <hr>
+        <h3>3. 원문 유해성 분석</h3>
+        <p>최고 위험 요소: {{ result.toxicity.top_label }} ({{ result.toxicity.top_score }})</p>
+    </div>
+{% endif %}
+
+<hr>
+<h3>최근 실행 기록</h3>
+{% if histories %}
+    <ul>
+        {% for h in histories %}
+            <li>[{{ h.created_at|date:"Y-m-d H:i" }}] {{ h.input_text|truncatechars:30 }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>최근 기록이 없습니다.</p>
+{% endif %}
+{% endblock %}

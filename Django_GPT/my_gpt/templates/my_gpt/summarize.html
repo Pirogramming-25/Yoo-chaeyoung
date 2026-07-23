@@ -1,0 +1,41 @@
+{% extends 'my_gpt/base.html' %}
+
+{% block content %}
+<h2>문서 요약</h2>
+<p><strong>사용 모델:</strong> sshleifer/distilbart-cnn-6-6</p>
+<p><strong>입력 언어:</strong> 영어 (100자 ~ 5,000자)</p>
+
+<form method="post" onsubmit="showLoading()">
+    {% csrf_token %}
+    <textarea name="text" rows="8" cols="60" placeholder="요약할 긴 영어 문서를 입력하세요 (100자 이상)..."></textarea><br><br>
+    <button type="submit" id="submit-btn">요약 실행</button>
+</form>
+
+<div id="loading">요약문 생성 중... 잠시만 기다려주세요.</div>
+
+{% if error %}
+    <div class="error-msg">{{ error }}</div>
+{% endif %}
+
+{% if result %}
+    <div class="result-box">
+        <h3>[요약 결과]</h3>
+        <p>원문 길이: {{ result.original_len }}자 | 요약문 길이: {{ result.summary_len }}자 | 요약 비율: {{ result.ratio }}</p>
+        <hr>
+        <p><strong>요약문:</strong></p>
+        <p>{{ result.summary }}</p>
+    </div>
+{% endif %}
+
+<hr>
+<h3>최근 실행 기록</h3>
+{% if histories %}
+    <ul>
+        {% for h in histories %}
+            <li>[{{ h.created_at|date:"Y-m-d H:i" }}] {{ h.input_text|truncatechars:30 }} &rarr; {{ h.output_text|truncatechars:40 }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>최근 기록이 없습니다.</p>
+{% endif %}
+{% endblock %}
