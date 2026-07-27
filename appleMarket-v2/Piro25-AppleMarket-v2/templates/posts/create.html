@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>post_create</title>
+<style>
+    main {
+        height: 100vh;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<form action="{% url 'posts:create' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-success">등록하기</button>
+</form>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("=== OCR 스크립트 로드 성공 ===");
+
+    const nutritionInput = document.querySelector('input[name="nutrition_image"]') || document.getElementById('id_nutrition_image');
+    const calInput = document.querySelector('input[name="calories"]') || document.getElementById('id_calories');
+    const carbsInput = document.querySelector('input[name="carbs"]') || document.getElementById('id_carbs');
+    const proteinInput = document.querySelector('input[name="protein"]') || document.getElementById('id_protein');
+    const fatInput = document.querySelector('input[name="fat"]') || document.getElementById('id_fat');
+
+    if (!nutritionInput) {
+        console.error("❌ nutrition_image 필드를 찾을 수 없습니다.");
+        return;
+    }
+
+    nutritionInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        console.log("선택된 파일:", file.name);
+
+        [calInput, carbsInput, proteinInput, fatInput].forEach(input => {
+            if (input) {
+                input.value = '';
+                input.placeholder = '분석 중...';
+            }
+        });
+
+        const formData = new FormData();
+        formData.append('nutrition_image', file);
+
+        fetch("{% url 'posts:process_ocr' %}", {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: formData
+        })
+        .then(response => response.json())
+        .then(res => {
+            console.log("OCR 통신 결과:", res);
+
+            if (res.success) {
+                const data = res.data;
+                if (calInput) calInput.value = data.calories ?? '';
+                if (carbsInput) carbsInput.value = data.carbs ?? '';
+                if (proteinInput) proteinInput.value = data.protein ?? '';
+                if (fatInput) fatInput.value = data.fat ?? '';
+            } else {
+                alert('OCR 분석 실패: ' + (res.error || '알 수 없는 오류'));
+            }
+        })
+        .catch(err => {
+            console.error("통신 장애 발생:", err);
+            alert('서버 통신 중 오류가 발생했습니다.');
+        })
+        .finally(() => {
+            [calInput, carbsInput, proteinInput, fatInput].forEach(input => {
+                if (input) input.placeholder = '';
+            });
+        });
+    });
+});
+</script>
+{% endblock %}
